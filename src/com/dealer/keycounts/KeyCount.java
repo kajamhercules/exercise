@@ -12,7 +12,7 @@ import java.util.Map.Entry;
 
 public class KeyCount {
 	private HashMap<String, Collection<Integer>> mapperResult = new HashMap<String, Collection<Integer>>();
-	private HashMap<String, Integer> ruducerResult = new HashMap<String, Integer>();
+	
 	
 	private String filePath;
 	
@@ -27,13 +27,6 @@ public class KeyCount {
 					 
 	 }
 	 
-	 private void writeReduceResult(String key, Integer value){
-		 if (ruducerResult.get(key)== null){
-				
-			ruducerResult.put(key, value);
-		 }
-	 }
-	 
 	 public void mapper(String key, Integer value){
 		 this.writeMapResult(key, value);
 	 }
@@ -44,8 +37,8 @@ public class KeyCount {
 		 int total = 0;
 		 for (Integer value : values) {
 			total = total + value.intValue();
-		}
-		 this.writeReduceResult(key, Integer.valueOf(total));
+		 }
+		 System.out.println("The total for "+key +" is " + total);
 	 }
 	 
 	 public void execute() throws IOException{
@@ -71,11 +64,6 @@ public class KeyCount {
 		    while (mapIterator.hasNext()) {
 		        Map.Entry<String, Collection<Integer>> pair = (Map.Entry<String, Collection<Integer>>)mapIterator.next();
 		        this.reducer(pair.getKey(),pair.getValue());
-		    }
-		    Iterator<Entry<String,Integer>> reducerIterator = this.ruducerResult.entrySet().iterator();
-		    while (reducerIterator.hasNext()) {
-		        Map.Entry<String, Integer> resultPair = (Map.Entry<String,Integer>)reducerIterator.next();
-		        System.out.println("The total for "+resultPair.getKey() +" is " + resultPair.getValue());
 		    }
 		 
 	 }
