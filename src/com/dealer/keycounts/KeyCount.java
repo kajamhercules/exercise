@@ -56,8 +56,12 @@ public class KeyCount {
 			 	if(recordArray.length >= 2){
 			 		String key = recordArray[0];
 					String value = recordArray[1];
-					this.mapper(key, new Integer(value.trim()));	
-					}else{
+					try{
+					this.mapper(key, new Integer(value.trim()));
+					}catch (NumberFormatException e){
+						 System.out.println("Record is invalid, record discurded");
+					}
+				}else{
 						 System.out.println("Record is invalid, record discurded");
 					 }
 			 	

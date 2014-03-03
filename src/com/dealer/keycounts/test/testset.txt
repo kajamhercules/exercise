@@ -3,4 +3,4 @@ Jane, 3
 John, 5
 Jane, 1
 Alex, 1
-Vera, 5
+add, 1
